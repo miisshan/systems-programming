@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
                                 {
                                     for (int i = strlen(method); i < sizeof(request_line) / sizeof(char); i++)
                                     {
-                                        if (request_line[i] == ' ' & target_index == 0)
+                                        if (request_line[i] == ' ' && target_index == 0)
                                         {
                                             continue;
                                         }
@@ -107,11 +107,11 @@ int main(int argc, char *argv[])
                                         else
                                         {
                                             target[target_index] = request_line[i];
-                                            if (request_line[i] == '\r')
-                                            {
-                                                target[target_index] = '\0';
-                                                break;
-                                            }
+                                            // if (request_line[i] == '\r')
+                                            // {
+                                            //     target[target_index] = '\0';
+                                            //     break;
+                                            // }
                                             target_index++;
                                         }
                                     }
