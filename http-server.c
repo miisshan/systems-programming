@@ -22,8 +22,9 @@ int main(int argc, char *argv[])
     int bytes_received = 0;
 
     char buffer[BUFFER_LENGTH] = {0};
-    char method[10] = {0};
-    char target[20] = {0};
+    char method[20] = {0};
+    char target[1024] = {0};
+    int target_index = 0;
 
     if (WSA_result == 0)
     {
@@ -87,32 +88,36 @@ int main(int argc, char *argv[])
                                 {
                                     if (request_line[i] == ' ')
                                     {
-                                        request_line[i] = '\0';
                                         break;
                                     }
                                     method[i] = request_line[i];
                                 }
                                 if (strcmp(method, "GET") == 0)
                                 {
-                                    for (int i = sizeof(method) / sizeof(char) - 1; i < sizeof(request_line) / sizeof(char); i++)
+                                    for (int i = strlen(method); i < sizeof(request_line) / sizeof(char); i++)
                                     {
-                                        if (request_line[i] == '/' || request_line[i] == ' ')
+                                        if (request_line[i] == ' ' & target_index == 0)
                                         {
                                             continue;
                                         }
+                                        else if (request_line[i] == ' ')
+                                        {
+                                            break;
+                                        }
                                         else
                                         {
-                                            target[i] = request_line[i];
+                                            target[target_index] = request_line[i];
                                             if (request_line[i] == '\r')
                                             {
-                                                target[i] = '\0';
+                                                target[target_index] = '\0';
                                                 break;
                                             }
+                                            target_index++;
                                         }
                                     }
-                                    printf("The target is %s", target);
                                 }
-                                printf("The method is %s", method);
+                                printf("The target is %s\n", target);
+                                printf("The method is [%s]\n", method);
                             }
                             else
                             {
