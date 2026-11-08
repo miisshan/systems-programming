@@ -26,6 +26,14 @@ int main(int argc, char *argv[])
     char target[1024] = {0};
     int target_index = 0;
 
+    char *response =
+        "HTTP/1.1 200 OK\r\n"
+        "Content-Type: text/plain\r\n"
+        "Content-Length: 12\r\n"
+        "Connection: close\r\n"
+        "\r\n"
+        "Hello World!";
+
     if (WSA_result == 0)
     {
         printf("Winsock initialized succesfully!\n");
@@ -115,6 +123,8 @@ int main(int argc, char *argv[])
                                             target_index++;
                                         }
                                     }
+                                    target[target_index] = '\0';
+                                    send(client_socket, response, strlen(response), 0);
                                 }
                                 printf("The target is %s\n", target);
                                 printf("The method is [%s]\n", method);
