@@ -126,8 +126,8 @@ int main(int argc, char *argv[])
                                     target[target_index] = '\0';
                                     send(client_socket, response, strlen(response), 0);
                                 }
-                                printf("The target is %s\n", target);
-                                printf("The method is [%s]\n", method);
+                                // printf("The target is %s\n", target);
+                                // printf("The method is [%s]\n", method);
                             }
                             else
                             {
